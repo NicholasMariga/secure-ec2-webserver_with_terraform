@@ -1,0 +1,12 @@
+- hosts: web
+  become: yes
+  tasks:
+    - name: Ensure NGINX is installed
+      yum:
+        name: nginx
+        state: present
+
+    - name: Deploy website
+      template:
+        src: index.html.j2
+        dest: /usr/share/nginx/html/index.html
