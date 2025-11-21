@@ -1,20 +1,14 @@
-name: Terraform
+name: Terraform Destroy
 
 on:
-  pull_request:
-    paths:
-      - 'terraform/**'
-  push:
-    branches:
-      - main
-    paths:
-      - 'terraform/**'
+  workflow_dispatch:
 
 jobs:
-  terraform:
+  destroy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
+      - name: Checkout repo
         uses: actions/checkout@v4
 
       - name: Configure AWS credentials
@@ -29,12 +23,8 @@ jobs:
         with:
           terraform_version: 1.5.0
 
-      - name: Terraform init
+      - name: Terraform Init
         run: terraform -chdir=terraform init
-     
-      - name: Terraform destroy
-        run: terraform -chdir=terraform destroy -auto-approve 
 
-
-
-
+      - name: Terraform Destroy
+        run: terraform -chdir=terraform destroy -auto-approve
