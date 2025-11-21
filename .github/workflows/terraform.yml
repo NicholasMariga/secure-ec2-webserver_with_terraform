@@ -1,6 +1,7 @@
 name: Terraform
 
 on:
+  workflow_dispatch:
   pull_request:
     paths:
       - 'terraform/**'
@@ -41,8 +42,8 @@ jobs:
       - name: Terraform plan
         run: terraform -chdir=terraform plan -out=tfplan
      
-      - name: Terraform apply
-        run: terraform -chdir=terraform apply -auto-approve 
+      - name: Terraform destroy
+        run: terraform -chdir=terraform destroy -auto-approve 
 
 
 
